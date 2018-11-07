@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Database2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="CostId" />
+          </Key>
+          <Property Name="CostId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CostType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CostId" Type="int" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CostType__CostId__0D7A0286">
+          <End Role="Cost" Type="Self.Cost" Multiplicity="1" />
+          <End Role="CostType" Type="Self.CostType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cost">
+              <PropertyRef Name="CostId" />
+            </Principal>
+            <Dependent Role="CostType">
+              <PropertyRef Name="CostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CostType__TypeId__0E6E26BF">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="CostType" Type="Self.CostType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="CostType">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Database2ModelContainer">
+          <EntitySet Name="Cost" EntityType="Self.Cost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CostType" EntityType="Self.CostType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CostType__CostId__0D7A0286" Association="Self.FK__CostType__CostId__0D7A0286">
+            <End Role="Cost" EntitySet="Cost" />
+            <End Role="CostType" EntitySet="CostType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CostType__TypeId__0E6E26BF" Association="Self.FK__CostType__TypeId__0E6E26BF">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="CostType" EntitySet="CostType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cost">
+          <Key>
+            <PropertyRef Name="CostId" />
+          </Key>
+          <Property Name="CostId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="CostType" Relationship="Self.FK__CostType__CostId__0D7A0286" FromRole="Cost" ToRole="CostType" />
+        </EntityType>
+        <EntityType Name="CostType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CostId" Type="Int32" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cost" Relationship="Self.FK__CostType__CostId__0D7A0286" FromRole="CostType" ToRole="Cost" />
+          <NavigationProperty Name="Type" Relationship="Self.FK__CostType__TypeId__0E6E26BF" FromRole="CostType" ToRole="Type" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CostType" Relationship="Self.FK__CostType__TypeId__0E6E26BF" FromRole="Type" ToRole="CostType" />
+        </EntityType>
+        <Association Name="FK__CostType__CostId__0D7A0286">
+          <End Role="Cost" Type="Self.Cost" Multiplicity="1" />
+          <End Role="CostType" Type="Self.CostType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cost">
+              <PropertyRef Name="CostId" />
+            </Principal>
+            <Dependent Role="CostType">
+              <PropertyRef Name="CostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CostType__TypeId__0E6E26BF">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="CostType" Type="Self.CostType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="CostType">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cost" EntityType="Self.Cost" />
+          <EntitySet Name="CostType" EntityType="Self.CostType" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
+          <AssociationSet Name="FK__CostType__CostId__0D7A0286" Association="Self.FK__CostType__CostId__0D7A0286">
+            <End Role="Cost" EntitySet="Cost" />
+            <End Role="CostType" EntitySet="CostType" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CostType__TypeId__0E6E26BF" Association="Self.FK__CostType__TypeId__0E6E26BF">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="CostType" EntitySet="CostType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Database2ModelContainer" CdmEntityContainer="Database2Entities">
+          <EntitySetMapping Name="Cost">
+            <EntityTypeMapping TypeName="Database2Model.Cost">
+              <MappingFragment StoreEntitySet="Cost">
+                <ScalarProperty Name="CostId" ColumnName="CostId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CostType">
+            <EntityTypeMapping TypeName="Database2Model.CostType">
+              <MappingFragment StoreEntitySet="CostType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CostId" ColumnName="CostId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="Database2Model.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
