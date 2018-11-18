@@ -30,12 +30,17 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+               
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Model)
+                
             </td>
             <td>
-              
+                @Html.ActionLink("Edit", "Edit", new { id = item.TypeId })
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.TypeId })
+
             </td>
         </tr>
     }
