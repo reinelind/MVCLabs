@@ -23,7 +23,7 @@ namespace MVC2_1.Controllers
             var typeDelete = (from type in db.Type where type.TypeId == id select type).First();
             var costTypeDelete = (from costType in db.CostType where costType.TypeId == id select costType).First();
             var costDelete = (from cost in db.Cost where cost.CostId == costTypeDelete.CostId select cost).First();
-try
+        try
             {
                 
                 db.CostType.Remove(costTypeDelete);
@@ -37,9 +37,6 @@ try
                 ModelState.AddModelError(String.Empty, ex);
                 return View(typeDelete);
             }
-
-           
-
 
         }
 
